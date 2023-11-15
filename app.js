@@ -8,7 +8,13 @@ const getCatImages = () => {
   cardDiv.innerHTML = `<img src="./img/loading.gif" />`;
 
   fetch("https://api.thecatapi.com/v1/images/search?limit=10")
-    .then((res) => res.json())
+    .then((res) => {
+      if(res.ok){
+        return res.json()
+      }else{
+        throw new Error("Hata")
+      }
+    })
     .then((response) => {
       createElem(response);
     })
